@@ -10,13 +10,18 @@ import androidx.annotation.NonNull;
 
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
+    MyThread myThread;
+
     public MySurfaceView(Context context) {
         super(context);
+        getHolder().addCallback(this);
     }
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
-
+        myThread = new MyThread(getHolder());
+        myThread.flag = true;
+        myThread.start();
     }
 
     @Override
@@ -26,6 +31,6 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-
+        // убить поток
     }
 }
